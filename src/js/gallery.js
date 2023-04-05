@@ -13,13 +13,14 @@ const handalSearchFormSub = (event) =>{
 
   pixabayApi.q = inputEl.value.trim();
 
-  pixabayApi.fetchImages().then(({hits, total, totalHits}) => {
+  pixabayApi.fetchImages().then((data) => {
 
-    console.log(hits, total, totalHits)
+    console.log(data)
 
-    // galleryEl.innerHTML=createGallery({hits})
+    galleryEl.innerHTML=createGallery()
 
-    galleryEl.insertAdjacentHTML('beforeend', createGallery(hits));
+    // galleryEl.insertAdjacentHTML('beforeend', createGallery());
   })
 }
 formEl.addEventListener("submit", handalSearchFormSub)
+

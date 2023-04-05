@@ -1,5 +1,5 @@
-export default function createGallery(arr) {
-  return arr.map(createCardGallery).join('');
+export default function createGallery({total, tjtalHits, hits}) {
+  return {total, tjtalHits, hits}.map(createCardGallery).join('');
 }
 
 function createCardGallery({
