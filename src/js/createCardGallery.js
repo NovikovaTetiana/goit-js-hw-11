@@ -1,11 +1,8 @@
-export default function createGallery() {
-  createCardGallery();
+export function createCardsGallery(arr) {
+  return arr.map(createCard).join('');
 }
 
-function createCardGallery(images){
-  return images
-  .map(
- ({ 
+function createCard({
   webformatURL,
   largeImageURL,
   tags,
@@ -13,7 +10,7 @@ function createCardGallery(images){
   views,
   comments,
   downloads,
-}) => {
+}) {
   return `
    <a href="${largeImageURL}" class="gallery__item">
    <div class="photo-card">
@@ -43,6 +40,4 @@ function createCardGallery(images){
   </div>
 </a>
     `;
-}).join (' ')
 }
-

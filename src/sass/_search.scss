@@ -1,12 +1,21 @@
 body {
-  background-color: rgb(243, 244, 215);
+  background-color: rgb(248, 5, 139);
 }
 header {
   background-color: rgb(248, 5, 139);
   text-align: center;
+  position: relative;
+}
+.on-scroll {
+  position: fixed;
+  left: -100;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: rgba(248, 5, 139, 0.497);
 }
 .search-form {
-  height: 80px;
+  height: 100px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -25,7 +34,7 @@ header {
 }
 
 .btn {
-  width: 100px;
+  width: 150px;
   padding: 10px;
   box-shadow: 1px 6px 9px 0px rgba(0, 0, 0, 0.75);
   border: 1px solid transparent;
@@ -39,7 +48,8 @@ header {
 .btn:focus {
   box-shadow: 1px 6px 9px 0px rgba(0, 0, 0, 0);
   border: 1px solid rgb(159, 157, 157);
-  color: #000000;
+  color: rgb(13, 7, 54);
+  font-weight: 600;
 }
 
 .is-hidden {
@@ -54,6 +64,6 @@ header {
   clip-path: inset(50%);
   margin: -1px;
 }
-// .load-more {
-
-// }
+.load-more {
+  margin: 40px 0;
+}
