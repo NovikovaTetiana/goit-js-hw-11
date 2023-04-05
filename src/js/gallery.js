@@ -17,9 +17,9 @@ const handalSearchFormSub = (event) =>{
 
     console.log(data)
 
-    galleryEl.innerHTML=createGallery()
+    // galleryEl.innerHTML=createGallery(data.results)
 
-    // galleryEl.insertAdjacentHTML('beforeend', createGallery());
+    galleryEl.insertAdjacentHTML('beforeend', createGallery(data.results));
   })
 }
 formEl.addEventListener("submit", handalSearchFormSub)
