@@ -38,6 +38,5 @@ function createCard({
     </p>
   </div>
   </div>
-</a>
-    `;
+</a>`;
 }
