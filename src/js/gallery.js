@@ -8,6 +8,7 @@ const formEl = document.querySelector('#search-form');
 const loadBtn = document.querySelector('.load-more');
 const galleryEl = document.querySelector('.gallery');
 const inputEl = document.querySelector('.input');
+window.addEventListener('scroll', onScroll);
 
 const lightbox = new SimpleLightbox('.gallery a');
 
@@ -23,7 +24,6 @@ function hideElement(DOMElem, totalHits, page) {
 
 const pixabayApi = new PixabayAPI();
 
-
 const handleSearchFormSub = event => {
   event.preventDefault();
 
@@ -31,18 +31,17 @@ const handleSearchFormSub = event => {
     return;
   }
 
-pixabayApi.q = inputEl.value.trim()
-inputEl.value = '';
-  
+  pixabayApi.q = inputEl.value.trim();
+  inputEl.value = '';
 
   pixabayApi
     .fetchImages()
-    .then(({ total, totalHits, hits }) => {
-      galleryEl.innerHTML = createCardsGallery(hits);
+    .then(({ data }) => {
+      galleryEl.innerHTML = createCardsGallery(data.hits);
 
       lightbox.refresh();
 
-      if (!totalHits) {
+      if (!data.totalHits) {
         loadBtn.classList.add('is-hidden');
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -50,10 +49,10 @@ inputEl.value = '';
         return;
       }
 
-      hideElement(loadBtn, totalHits, pixabayApi.page);
+      hideElement(loadBtn, data.totalHits, pixabayApi.page);
 
-      if (totalHits) {
-        Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
+      if (data.totalHits) {
+        Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
       }
 
       loadBtn.classList.remove('is-hidden');
@@ -71,12 +70,12 @@ const handleLoadBtnClick = () => {
   pixabayApi.page += 1;
   pixabayApi
     .fetchImages()
-    .then(({ total, totalHits, hits }) => {
-      console.log(total, totalHits, hits);
+    .then(({ data }) => {
+      console.log(data);
 
-      hideElement(loadBtn, totalHits, pixabayApi.page);
+      hideElement(loadBtn, data.totalHits, pixabayApi.page);
 
-      galleryEl.insertAdjacentHTML('beforeend', createCardsGallery(hits));
+      galleryEl.insertAdjacentHTML('beforeend', createCardsGallery(data.hits));
     })
     .catch(err => {
       console.log(err);
@@ -84,3 +83,14 @@ const handleLoadBtnClick = () => {
 };
 
 loadBtn.addEventListener('click', handleLoadBtnClick);
+
+// ------------SCROLL PAGE
+function onScroll() {
+  const { height: cardHeight } =
+    galleryEl.firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
+}
