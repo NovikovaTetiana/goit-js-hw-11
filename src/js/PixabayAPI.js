@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { createCardsGallery } from './createCardGallery';
+import { displayCurrentPage, currentPage, paginationButtons } from './pagination';
+import Notiflix from 'notiflix';
+import { pagination } from './pagination';
 
 // export class PixabayAPI {
 //   #BASE_URL = 'https://pixabay.com/api/';
@@ -31,22 +34,16 @@ import { createCardsGallery } from './createCardGallery';
 //   }
 // }
 
+export const galleryEl = document.querySelector('.gallery');
 
-
-
-const galleryEl = document.querySelector('.gallery');
-
- class APIpopular {
+export class APIpopular {
   #BASE_URL = 'https://api.themoviedb.org/3/';
   #API_KEY = '1962278b5026dd7c7bb0a91cd47f798b';
- 
-  constructor() {
-    this.page = 1;
-  }
 
   async fetchMovies() {
     try {
       return await axios.get(`${this.#BASE_URL}trending/movie/week?api_key=${this.#API_KEY}`);
+
     } catch (err) {
       throw new Error(err.message);
     }
@@ -60,14 +57,18 @@ const handlerLoadWindow = () =>{
   ApipopularMovies
   .fetchMovies()
   .then(({data})=>{
+   
 console.log(data)
 
 // поміняти значення
 galleryEl.innerHTML = createCardsGallery(data.results);
+
   }).catch(err => {
     console.log(err)
   })
+ 
 }
 
 window.addEventListener('load', handlerLoadWindow)
+
 
