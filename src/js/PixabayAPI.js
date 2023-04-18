@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { createCardsGallery } from './createCardGallery';
-import { displayCurrentPage, currentPage, paginationButtons } from './pagination';
 import Notiflix from 'notiflix';
-import { pagination, handlerBntClick } from './pagination';
+
 
 // export class PixabayAPI {
 //   #BASE_URL = 'https://pixabay.com/api/';
@@ -60,9 +59,6 @@ const handlerLoadWindow = () =>{
    
 console.log(data)
 
-// const current = handlerBntClick()
-// console.log(current)
-// поміняти значення
 galleryEl.innerHTML = createCardsGallery(data.results);
 
   }).catch(err => {
