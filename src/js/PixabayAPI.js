@@ -33,7 +33,10 @@ import Notiflix from 'notiflix';
 //   }
 // }
 
+
 export const galleryEl = document.querySelector('.gallery');
+
+spinnerPlay()
 
 export class APIpopular {
   #BASE_URL = 'https://api.themoviedb.org/3/';
@@ -61,6 +64,8 @@ console.log(data)
 
 galleryEl.innerHTML = createCardsGallery(data.results);
 
+loadEnd()
+
   }).catch(err => {
     console.log(err)
   })
@@ -69,4 +74,22 @@ galleryEl.innerHTML = createCardsGallery(data.results);
 
 window.addEventListener('load', handlerLoadWindow)
 
+const notifyInit = {
+  width: '250px',
+  position: 'right-bottom',
+  distance: '20px',
+  timeout: 1500,
+  opacity: 0.8,
+  fontSize: '16px',
+  borderRadius: '50px',
+};
+export function spinnerPlay() {
+  refs.body.classList.add('loading');
+}
 
+export function spinnerStop() {
+  window.setTimeout(function () {
+    refs.body.classList.remove('loading');
+    refs.body.classList.add('loaded');
+  }, 1500);
+}
