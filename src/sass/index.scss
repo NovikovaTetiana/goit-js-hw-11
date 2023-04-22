@@ -1,4 +1,6 @@
-@import './common';
+@import './utils/common';
+@import './utils/mixins';
+@import './utils/variables';
+@import './utils/reset';
 @import './search';
 @import './gallery';
-// @import './spinner';
